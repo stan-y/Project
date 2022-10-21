@@ -35,10 +35,14 @@ def index(request):
     j=0
     for i in range(6):
         j=j+2
-        temp =Detailed_desc.objects.get(dest_id=j)
-        dest1.append(temp)
+        # temp = Detailed_desc.objects.get(dest_id=j)
+        # dest1.append(temp)
 
     return render(request, 'index.html',{'dests': dests, 'dest1' : dest1})
+
+
+
+    
 
 def register(request):
     if request.method == 'POST':
@@ -91,11 +95,12 @@ def login(request):
         return render(request, 'login.html')
 
 
+def about(request):
+     return render(request, 'about.html')   
+
 def logout(request):
     auth.logout(request)
     return redirect('index')
-
-
 
 
 @login_required(login_url='login')

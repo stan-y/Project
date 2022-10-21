@@ -1,11 +1,13 @@
 from django.contrib import admin
 from django.urls import path, include
+from travello import views
 
 from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('register', views.register, name='register'),
     path('login', views.login, name='login'),
+    path('about', views.about, name='about'),
     path('logout', views.logout, name='logout'),
     path('search', views.search, name='search'),
     path('destination_list/<str:city_name>', views.destination_list, name='destination_list'),
