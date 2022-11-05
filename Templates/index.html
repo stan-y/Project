@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Travelo</title>
+    <title>Ticketing System</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -41,8 +41,8 @@
                         <div class="row align-items-center">
                             <div class="col-xl-2 col-lg-2">
                                 <div class="logo">
-                                    <a href="index.html">
-                                        <img src="{% static 'img/logo.png' %}" alt="">
+                                    <a href="#">
+                                        <img src="{% static 'img/logo1.png' %}" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -51,8 +51,8 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a class="active" href="/">home</a></li>
-                                            <li><a href="about.html">About</a></li>
-                                             </li>
+                                            <!-- <li><a href="about.html">About</a></li>
+                                             </li> -->
                                              <li><a href="upcoming_trips">Upcoming Trips</a></li>
                                              </li>
                                             {% if user.is_authenticated %}
@@ -62,12 +62,12 @@
                                             <li><a href="login">Login</a></li>
                                             <li><a href="register">Register</a></li>
                                             {%endif%}
-                                            <li><a href="#">blog <i class="ti-angle-down"></i></a>
+                                            <!-- <li><a href="#">blog <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                     <li><a href="blog.html">blog</a></li>
                                                     <li><a href="single-blog.html">single-blog</a></li>
                                                 </ul>
-                                            </li>
+                                            </li> -->
                                             <li><a href="contact.html"></a></li>
 
                                         </ul>
@@ -79,7 +79,7 @@
                              <div class="col-xl-4 col-lg-4 d-none d-lg-block">
                                 <div class="social_wrap d-flex align-items-center justify-content-end">
                                     <div class="number">
-                                        <p> <i class="fa fa-phone"></i> 0261-25569</p>
+                                        <p> <i class="fa fa-phone"></i> +263 772 000 </p>
                                     </div>
 
                                     <div class="social_links d-none d-xl-block">
@@ -122,7 +122,7 @@
                     <div class="row align-items-center">
                         <div class="col-xl-12 col-md-12">
                             <div class="slider_text text-center">
-                                <h3>Switzerland</h3>
+                                <h3>Mount Pleasent</h3>
                                 <p></p>
                                 <a href="destination_details/Switzerland" class="boxed-btn3">Explore Now</a>
                             </div>
@@ -136,7 +136,7 @@
                     <div class="row align-items-center">
                         <div class="col-xl-12 col-md-12">
                             <div class="slider_text text-center">
-                                <h3>Australia</h3>
+                                <h3>Eastlea</h3>
                                 <p></p>
                                 <a href="destination_list/Australia" class="boxed-btn3">Explore Now</a>
                             </div>
@@ -150,7 +150,7 @@
                     <div class="row align-items-center">
                         <div class="col-xl-12 col-md-12">
                             <div class="slider_text text-center">
-                                <h3>Italy</h3>
+                                <h3>Warren Park</h3>
                                 <p></p>
                                 <a href="destination_list/Italy" class="boxed-btn3">Explore Now</a>
                             </div>
@@ -260,7 +260,7 @@
     </div>
     <!-- newletter_area_end  -->
 
-    <div class="popular_places_area">
+   <!-- <div class="popular_places_area">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-6">
@@ -359,6 +359,7 @@
             </div>
         </div>
     </div>
+    -->
 
 
     <!-- testimonial_area  -->
@@ -374,11 +375,11 @@
                                 <div class="col-lg-8">
                                     <div class="single_testmonial text-center">
                                         <div class="author_thumb">
-                                            <img src="{% static 'img/testmonial/author6.png' %}" alt="">
+                                            <img src="{% static 'img/testmonial/authorr.png' %}" alt="">
                                         </div>
                                         <p>"The gladdest moment in human life is a departure into unknown lands.</p>
                                         <div class="testmonial_author">
-                                            <h3>- Alvero morte</h3>
+                                            <h3>- Junior </h3>
                                         </div>
                                     </div>
                                 </div>
@@ -389,11 +390,11 @@
                                 <div class="col-lg-8">
                                     <div class="single_testmonial text-center">
                                         <div class="author_thumb">
-                                            <img src="{% static 'img/testmonial/author.png' %}" alt="">
+                                            <img src="{% static 'img/testmonial/authorr.png' %}" alt="">
                                         </div>
                                         <p>"The gladdest moment in human life is a departure into unknown lands. </p>
                                         <div class="testmonial_author">
-                                            <h3>- Alvaro M.</h3>
+                                            <h3>- Stanford</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -404,11 +405,11 @@
                                 <div class="col-lg-8">
                                     <div class="single_testmonial text-center">
                                         <div class="author_thumb">
-                                            <img src="{% static 'img/testmonial/author.png' %}" alt="">
+                                            <img src="{% static 'img/testmonial/authorr.png' %}" alt="">
                                         </div>
                                         <p>"Travel makes one modest. You see what a tiny place you occupy in the world.</p>
                                         <div class="testmonial_author">
-                                            <h3>- Shrey B.</h3>
+                                            <h3>- Takura</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -433,12 +434,12 @@
                         <div class="footer_widget">
                             <div class="footer_logo">
                                 <a href="#">
-                                    <img src="{% static 'img/footer_logo.png' %}" alt="">
+                                    <img src="{% static 'img/logo1.png' %}" alt="">
                                 </a>
                             </div>
-                            <p>Kishan samosa<br> lane New York-1782 <br>
-                                <a href="#">+91 99999 88888</a> <br>
-                                <a href="#">dharmilvaghasia3675@gmail.com</a>
+                            <p>Stanford J.T Zhuwao<br> R184030X <br>
+                                <a href="#">+263 772 000</a> <br>
+                                <a href="#">sjnrzhuwao@gmail.com</a>
                             </p>
                             <div class="socail_links">
                                 <ul>
@@ -463,7 +464,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="https://www.youtube.com/user/javaboynavin">
+                                        <a href="#">
                                             <i class="fa fa-youtube-play"></i>
                                         </a>
                                     </li>
@@ -491,14 +492,14 @@
                                 Popular destination
                             </h3>
                             <ul class="links double_links">
-                                <li><a href="#">Indonesia</a></li>
-                                <li><a href="#">America</a></li>
-                                <li><a href="#">India</a></li>
-                                <li><a href="#">Switzerland</a></li>
-                                <li><a href="#">Italy</a></li>
-                                <li><a href="#">Canada</a></li>
-                                <li><a href="#">Franch</a></li>
-                                <li><a href="#">England</a></li>
+                                <li><a href="#">Warren Park</a></li>
+                                <li><a href="#">University of Zim</a></li>
+                                <li><a href="#">Mbare</a></li>
+                                <li><a href="#">RG Mugabe Airport</a></li>
+                                <li><a href="#">Greendale</a></li>
+                                <li><a href="#">Msasa</a></li>
+                                <li><a href="#">Chisipite</a></li>
+                                <li><a href="#">Borrowdale</a></li>
                             </ul>
                         </div>
                     </div>
@@ -510,32 +511,32 @@
                             <div class="instagram_feed">
                                 <div class="single_insta">
                                     <a href="#">
-                                        <img src="{% static 'img/instagram/1.png' %}" alt="">
+                                        <img src="{% static 'img/instagram/11.png' %}" alt="">
                                     </a>
                                 </div>
                                 <div class="single_insta">
                                     <a href="#">
-                                        <img src="{% static 'img/instagram/2.png' %}" alt="">
+                                        <img src="{% static 'img/instagram/22.png' %}" alt="">
                                     </a>
                                 </div>
                                 <div class="single_insta">
                                     <a href="#">
-                                        <img src="{% static 'img/instagram/3.png' %}" alt="">
+                                        <img src="{% static 'img/instagram/33.png' %}" alt="">
                                     </a>
                                 </div>
                                 <div class="single_insta">
                                     <a href="#">
-                                        <img src="{% static 'img/instagram/4.png' %}" alt="">
+                                        <img src="{% static 'img/instagram/44.png' %}" alt="">
                                     </a>
                                 </div>
                                 <div class="single_insta">
                                     <a href="#">
-                                        <img src="{% static 'img/instagram/5.png' %}" alt="">
+                                        <img src="{% static 'img/instagram/55.png' %}" alt="">
                                     </a>
                                 </div>
                                 <div class="single_insta">
                                     <a href="#">
-                                        <img src="{% static 'img/instagram/6.png' %}" alt="">
+                                        <img src="{% static 'img/instagram/66.png' %}" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -544,6 +545,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="copy-right_text">
             <div class="container">
                 <div class="footer_border"></div>
@@ -551,16 +553,17 @@
                     <div class="col-xl-12">
                         <p class="copy_right text-center">
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy;
+                             &copy;
                             <script>
                                 document.write(new Date().getFullYear());
-                            </script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            </script> <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="#" target="_blank">Stan</a> 
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </p>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> 
+  
     </footer>
 
 
