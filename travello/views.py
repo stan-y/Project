@@ -20,6 +20,7 @@ from django.shortcuts import render
 from django.template import Library
 from datetime import datetime
 from django.contrib.auth.models import User
+from paynow import Paynow
 
 
 
@@ -30,6 +31,77 @@ import random
 # Create your views here.
 
 def index(request):
+    dests = Destination.objects.all()
+    dest1 = []
+    j=0
+    for i in range(6):
+        j=j+2
+        temp =Detailed_desc.objects.get(dest_id=j)
+        dest1.append(temp)
+
+    return render(request, 'index.html',{'dests': dests, 'dest1' : dest1})
+
+def result_url(request):
+    dests = Destination.objects.all()
+    dest1 = []
+    j=0
+    print(request.body)
+    for i in range(6):
+        j=j+2
+        temp =Detailed_desc.objects.get(dest_id=j)
+        dest1.append(temp)
+
+    return render(request, 'index.html',{'dests': dests, 'dest1' : dest1})
+
+def return_url(request):
+    dests = Destination.objects.all()
+    dest1 = []
+    j=0
+    print(request.body)
+    for i in range(6):
+        j=j+2
+        temp =Detailed_desc.objects.get(dest_id=j)
+        dest1.append(temp)
+
+    return render(request, 'index.html',{'dests': dests, 'dest1' : dest1})
+
+def topup(request):
+
+    paynow = Paynow(
+    '15441', 
+    'f4a5d055-d142-4daa-bb13-86e908cc7f42',
+    'http://127.0.0.1:8000/return_url', 
+    'http://127.0.0.1:8000/result_url'
+    )
+
+    payment = paynow.create_payment('Order #100', 'test@example.com')
+
+    payment.add('Bananas', 2.50)
+    payment.add('Apples', 3.40)
+
+    # Save the response from paynow in a variable
+    response = paynow.send(payment)
+
+    if response.success:
+        # Get the link to redirect the user to, then use it as you see fit
+        link = response.redirect_url
+
+        # Get the poll url (used to check the status of a transaction). You might want to save this in your DB
+        pollUrl = response.poll_url
+
+        return redirect(link)
+
+        # print("Poll Url: ", poll_url)
+
+        # status = paynow.check_transaction_status(poll_url)
+
+        # time.sleep(30)
+
+        # print("Payment Status: ", status.status)
+    return redirect(request.META.get('HTTP_REFERER'))
+
+
+
     dests = Destination.objects.all()
     dest1 = []
     j=0
