@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Destination
+from .models import Destination, Wallet
 from .models import Detailed_desc
 from .models import pessanger_detail
 from .models import Cards
