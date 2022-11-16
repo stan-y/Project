@@ -65,5 +65,3 @@ class Transactions(models.Model):
     Status = models.CharField(default="Failed", max_length=15)
     Payment_method = models.CharField(blank=True, max_length=15)
     Date_Time = models.CharField(default=timezone.now(), max_length=19)
-
-
