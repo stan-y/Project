@@ -21,6 +21,7 @@ from django.template import Library
 from datetime import datetime
 from django.contrib.auth.models import User
 from paynow import Paynow
+from django.http import JsonResponse
 
 
 
@@ -140,6 +141,18 @@ def register(request):
         return redirect('index')
     else:
         return render(request, 'register.html')
+
+def rfid(request):
+    if request.method == 'POST':
+        card = request.POST['card']
+
+        user = User.objects.get(cardId=card)
+
+        data = {'balance': user.balance}
+
+        return JsonResponse(data, safe=False)
+    else:
+        return render(request, 'rfid.html')
 
 def login(request):
     if request.method == 'POST':
