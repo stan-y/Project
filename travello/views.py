@@ -20,7 +20,7 @@ from django.shortcuts import render
 from django.template import Library
 from datetime import datetime
 from django.contrib.auth.models import User
-from paynow import Paynow
+
 
 
 
