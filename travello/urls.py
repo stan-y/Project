@@ -13,6 +13,7 @@ urlpatterns = [
     path('return_url', views.return_url, name='return'),
 
     path('rfid', views.rfid, name='rfid'),
+    path('set-balance', views.setBalance, name='setBalance'),
 
     path('destination_list/<str:city_name>', views.destination_list, name='destination_list'),
     path('destination_list/destination_details/<str:city_name>', views.destination_details, name='destination_details'),

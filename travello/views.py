@@ -22,6 +22,7 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from paynow import Paynow
 from django.http import JsonResponse
+from django.utils.datastructures import MultiValueDictKeyError
 
 
 
@@ -145,14 +146,47 @@ def register(request):
 def rfid(request):
     if request.method == 'POST':
         card = request.POST['card']
+        try:
+            user = User.objects.get(cardId=card)
+        except User.DoesNotExist:
+            data = {'message': "Card does not exist"}
+            return JsonResponse(data, safe=False)     
 
-        user = User.objects.get(cardId=card)
-
-        data = {'balance': user.balance}
+        data = {'balance': user.balance,
+                'hasTicket': user.ticket
+        }
 
         return JsonResponse(data, safe=False)
     else:
         return render(request, 'rfid.html')
+
+def setBalance(request):
+    if request.method == 'POST':
+        card = request.POST['card']
+        newBalance = request.POST['newBalance']
+        try:
+            hasTicket = request.POST['hasTicket']
+        except MultiValueDictKeyError:
+            hasTicket = False
+        try:
+            user = User.objects.get(cardId=card)
+        except User.DoesNotExist:
+            data = {'message': "Card does not exist"}
+            return JsonResponse(data, safe=False)  
+          
+        if hasTicket == 'true':
+            user.ticket = True
+        user.balance =  newBalance
+        user.save()
+
+        data = {'newbalance': user.balance,
+                'hasTicket': user.ticket,
+                'message': 'Balance updated'
+        }
+
+        return JsonResponse(data, safe=False)
+    else:
+        return render(request, 'balance.html')
 
 def login(request):
     if request.method == 'POST':
