@@ -373,37 +373,37 @@ def card_payment(request):
     CVV = request.POST['cvv']
 
     request.session['dcard'] = card_no
-    try:
-        balance = Cards.objects.get(Card_number=card_no, Ex_month=MM, Ex_Year=YY, CVV=CVV).Balance
-        request.session['total_balance'] = balance
-        mail1 = Cards.objects.get(Card_number=card_no, Ex_month=MM, Ex_Year=YY, CVV=CVV).email
+    # try:
+    balance = User2.objects.get(cardId=card_no).balance
+    # mail1 = User.objects.get(cardId=card_no).email
+    request.session['total_balance'] = balance
 
-        if int(balance) >= int(request.session['pay_amount']):
-            # print("if ma gayu")
-            rno = random.randint(100000, 999999)
-            request.session['OTP'] = rno
+    if int(balance) >= int(request.session['pay_amount']):
+        # print("Twist the coder")
+        rno = random.randint(100000, 999999)
+        request.session['OTP'] = rno
 
-            amt = request.session['pay_amount']
-            username = request.user.get_username()
-            print(username)
-            user = User.objects.get(username=username)
-            mail_id = user.email
-            print([mail_id])
-            msg = 'Your OTP For Payment of ₹' + str(amt) + ' is ' + str(rno)
-            # print(msg)
-            # print([mail_id])
-            # print(amt)
-            send_mail('OTP for Debit card Payment',
-                      msg,
-                      'travellotours89@gmail.com',
-                      [mail_id],
-                      fail_silently=False)
-            return render(request, 'OTP.html')
-        return render(request, 'wrongdata.html')
+        amt = request.session['pay_amount']
+        username = request.user.get_username()
+        print(username)
+        user = User.objects.get(username=username)
+        mail_id = user.email
+        print([mail_id])
+        msg = 'Your OTP For Payment of ₹' + str(amt) + ' is ' + str(rno)
+        # print(msg)
+        # print([mail_id])
+        # print(amt)
+        # send_mail('OTP for Debit card Payment',
+        #             msg,
+        #             'travellotours89@gmail.com',
+        #             [mail_id],
+        #             fail_silently=False)
+        return render(request, 'OTP.html')
+    return render(request, 'wrongdata.html')
 
 
-    except:
-        return render(request, 'wrongdata.html')
+    # except:
+    #     return render(request, 'index.html')
 
 @login_required(login_url='login')
 def net_payment(request):
@@ -436,32 +436,34 @@ def net_payment(request):
 
 @login_required(login_url='login')
 def otp_verification(request):
-    otp1 = int(request.POST['otp'])
+    # otp1 = int(request.POST['otp'])
     usernameget = request.user.get_username()
     Trip_same_id1 = request.session['Trip_same_id']
     amt = int(request.session['pay_amount'])
     pay_method = 'Debit card'
-    if otp1 == int(request.session['OTP']):
-        del request.session["OTP"]
-        total_balance = int(request.session['total_balance'])
-        rem_balance = int(total_balance-int(request.session["pay_amount"]))
-        c = Cards.objects.get(Card_number=request.session['dcard'])
-        c.Balance = rem_balance
-        c.save(update_fields=['Balance'])
-        c.save()
-        t = Transactions(username=usernameget, Trip_same_id=Trip_same_id1, Amount=amt, Payment_method=pay_method, Status='Successfull')
-        t.save()
-        z = pessanger_detail.objects.all().filter(Trip_same_id=Trip_same_id1)
-        for obj in z:
-            obj.pay_done = 1
-            obj.save(update_fields=['pay_done'])
-            obj.save()
-            print(obj.pay_done)
-        return render(request, 'confirmetion_page.html')
-    else:
-        t = Transactions(username=usernameget, Trip_same_id=Trip_same_id1, Amount=amt, Payment_method=pay_method)
-        t.save()
-        return render(request, 'wrong_OTP.html')
+    # if otp1 == int(request.session['OTP']):
+
+    # del request.session["OTP"]
+    total_balance = int(request.session['total_balance'])
+    rem_balance = int(total_balance-int(request.session["pay_amount"]))
+    c = User2.objects.get(cardId=request.session['dcard'])
+    c.balance = rem_balance
+    c.save(update_fields=['balance'])
+    c.save()
+    t = Transactions(username=usernameget, Trip_same_id=Trip_same_id1, Amount=amt, Payment_method=pay_method, Status='Successfull')
+    t.save()
+    z = pessanger_detail.objects.all().filter(Trip_same_id=Trip_same_id1)
+    for obj in z:
+        obj.pay_done = 1
+        obj.save(update_fields=['pay_done'])
+        obj.save()
+        print(obj.pay_done)
+    return render(request, 'confirmetion_page.html')
+
+    # else:
+    #     t = Transactions(username=usernameget, Trip_same_id=Trip_same_id1, Amount=amt, Payment_method=pay_method)
+    #     t.save()
+    #     return render(request, 'wrong_OTP.html')
 
 @login_required(login_url='login')
 def data_fetch(request):

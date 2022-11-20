@@ -65,7 +65,7 @@ class Transactions(models.Model):
     Amount = models.CharField(max_length=8)
     Status = models.CharField(default="Failed", max_length=15)
     Payment_method = models.CharField(blank=True, max_length=15)
-    Date_Time = models.CharField(default=timezone.now(), max_length=19)
+    Date_Time = models.CharField(default=timezone.now(), max_length=150)
 
 class Wallet(models.Model):
     wallet_id = models.AutoField(primary_key=True)
