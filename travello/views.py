@@ -33,6 +33,8 @@ import random
 # Create your views here.
 
 def index(request):
+    userid = request.user.id
+    
     dests = Destination.objects.all()
     dest1 = []
     j=0
@@ -41,7 +43,14 @@ def index(request):
         temp =Detailed_desc.objects.get(dest_id=j)
         dest1.append(temp)
 
-    return render(request, 'index.html',{'dests': dests, 'dest1' : dest1})
+    try:
+        user = User.objects.get(id = userid)
+        u = User2.objects.get(user = user)
+        return render(request, 'index.html',{'dests': dests, 'dest1' : dest1, 'balance' : u.balance})
+    except:
+        return render(request, 'index.html',{'dests': dests, 'dest1' : dest1 })
+
+  
 
 def result_url(request):
     dests = Destination.objects.all()
@@ -178,6 +187,8 @@ def setBalance(request):
           
         if hasTicket == 'true':
             user.ticket = True
+        else:
+            user.ticket = False
         user.balance =  newBalance
         user.save()
 
@@ -287,12 +298,12 @@ def pessanger_detail_def(request, city_name):
             obj.save()
             no_of_person = formset.total_form_count()
             price1 = no_of_person * price
-            GST = price1 * 0.18
-            GST = float("{:.2f}".format(GST))
-            final_total = GST + price1
+            TAX = price1 * 0.05
+            TAX = float("{:.2f}".format(TAX))
+            final_total = TAX + price1
             request.session['pay_amount'] = final_total
             return render(request,'payment.html', {'no_of_person': no_of_person,
-                                                   'price1': price1, 'GST': GST, 'final_total': final_total,'city': city })
+                                                   'price1': price1, 'TAX': TAX, 'final_total': final_total,'city': city })
     else:
         formset = KeyValueFormSet()
 
@@ -332,12 +343,12 @@ def add_funds(request):
             obj.save()
             no_of_person = formset.total_form_count()
             price1 = no_of_person * price
-            GST = price1 * 0.18
-            GST = float("{:.2f}".format(GST))
-            final_total = GST + price1
+            TAX = price1 * 0.18
+            TAX = float("{:.2f}".format(TAX))
+            final_total = TAX + price1
             request.session['pay_amount'] = final_total
             return render(request,'payment.html', {'no_of_person': no_of_person,
-                                                   'price1': price1, 'GST': GST, 'final_total': final_total,'city': city })
+                                                   'price1': price1, 'TAX': TAX, 'final_total': final_total,'city': city })
     
     else:
         formset = KeyValueFormSet()

@@ -57,7 +57,7 @@
                                              </li>
                                             {% if user.is_authenticated %}
                                             <li>Hello, {{user.first_name}}</li>
-                                            <li><a href="add_funds">Balance, ${{user.balance}}</a></li>
+                                            <li><a href="add_funds">Balance, ${{balance}}</a></li>
                                             <li><a href="logout">logout</a></li>
                                             {%else%}
                                             <li><a href="login">Login</a></li>
