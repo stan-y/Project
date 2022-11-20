@@ -376,7 +376,8 @@ def card_payment(request):
     try:
         balance = User2.objects.get(cardId=card_no).balance
     except User2.DoesNotExist:
-            return render(request, 'wrongdata.html')
+            msg= 'Card does not exist'
+            return render(request, 'wrongdata.html', {'info':msg})
 
 
     # mail1 = User.objects.get(cardId=card_no).email
@@ -403,7 +404,7 @@ def card_payment(request):
         #             [mail_id],
         #             fail_silently=False)
         return render(request, 'OTP.html')
-    return render(request, 'wrongdata.html')
+    return render(request, 'wrongdata.html', {'info':'Insufficient Balance'})
 
 
     # except:
@@ -451,6 +452,7 @@ def otp_verification(request):
     total_balance = int(request.session['total_balance'])
     rem_balance = int(total_balance-int(request.session["pay_amount"]))
     c = User2.objects.get(cardId=request.session['dcard'])
+    c.ticket = True
     c.balance = rem_balance
     c.save(update_fields=['balance'])
     c.save()
