@@ -28,6 +28,14 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+
+
+
+    <script type="module" src="{% static 'index.js' %}"></script>
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
 </head>
 
@@ -117,18 +125,45 @@
         </div>
     </header>
     <!-- header-end -->
+    <script>
+      
+        lat = "{{dest.long}}";
+        long = "{{dest.lat}}";
+        lat = Number(lat)
+        long = Number(long)
+        function initMap() {
 
-    <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3799.1980241145725!2d31.05245005086496!3d{{dest.long}}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1931a5673118070f%3A0xb9107787eed9e671!2sUniversity%20of%20Zimbabwe!5e0!3m2!1sen!2szw!4v1667255924639!5m2!1sen!2szw" width="1900" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
-    <!-- <iframe src="http://maps.google.com/?q={{dest.lat}},{{dest.long}}" width="1900" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
-   <!-- <div class="destination_banner_wrap overlay">
-        <div class="destination_text text-center">
-            <h3>{{dest.dest_name}}</h3>
-            
+            const uluru = { lat:lat, lng: long };
+            const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 18,
+            center: uluru,
+            });
+            const marker = new google.maps.Marker({
+            position: uluru,
+            map: map,
+            });
+        }
+    
+        window.initMap = initMap;
+    </script>
 
-        </div>
-    </div>-->
-    <!-- http://maps .google .com/?q={{dest.lat}},{{dest.long}} -->
-    <img id="small-map" height="198" width="254" alt="Google Map" src="https://maps.google.com/?q={{dest.long}},{{dest.lat}}" />
+
+
+    <div id="map"></div>
+
+    <!-- 
+     The `defer` attribute causes the callback to execute after the full HTML
+     document has been parsed. For non-blocking uses, avoiding race conditions,
+     and consistent behavior across browsers, consider loading using Promises
+     with https://www.npmjs.com/package/@googlemaps/js-api-loader.
+    -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_GIsewvGhNbMMc7E4cyhexcC76Kig-mc&callback=initMap&v=weekly"
+      defer
+    ></script>
+
+
+
 
     <div class="destination_details_info">
         <div class="container">
