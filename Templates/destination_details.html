@@ -118,13 +118,17 @@
     </header>
     <!-- header-end -->
 
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3799.1980241145725!2d31.05245005086496!3d-17.78238807965447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1931a5673118070f%3A0xb9107787eed9e671!2sUniversity%20of%20Zimbabwe!5e0!3m2!1sen!2szw!4v1667255924639!5m2!1sen!2szw" width="1900" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3799.1980241145725!2d31.05245005086496!3d{{dest.long}}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1931a5673118070f%3A0xb9107787eed9e671!2sUniversity%20of%20Zimbabwe!5e0!3m2!1sen!2szw!4v1667255924639!5m2!1sen!2szw" width="1900" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
+    <!-- <iframe src="http://maps.google.com/?q={{dest.lat}},{{dest.long}}" width="1900" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
    <!-- <div class="destination_banner_wrap overlay">
         <div class="destination_text text-center">
             <h3>{{dest.dest_name}}</h3>
+            
 
         </div>
     </div>-->
+    <!-- http://maps .google .com/?q={{dest.lat}},{{dest.long}} -->
+    <img id="small-map" height="198" width="254" alt="Google Map" src="https://maps.google.com/?q={{dest.long}},{{dest.lat}}" />
 
     <div class="destination_details_info">
         <div class="container">

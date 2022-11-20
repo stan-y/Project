@@ -302,8 +302,11 @@ def pessanger_detail_def(request, city_name):
             TAX = float("{:.2f}".format(TAX))
             final_total = TAX + price1
             request.session['pay_amount'] = final_total
+            userid = request.user.id
+            cardId = User2.objects.get(user_id=userid).cardId
+            
             return render(request,'payment.html', {'no_of_person': no_of_person,
-                                                   'price1': price1, 'TAX': TAX, 'final_total': final_total,'city': city })
+                                                   'price1': price1, 'TAX': TAX, 'final_total': final_total,'city': city, 'cardId': cardId })
     else:
         formset = KeyValueFormSet()
 

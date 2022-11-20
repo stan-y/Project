@@ -20,6 +20,8 @@ class Detailed_desc(models.Model):
     days = models.IntegerField(default=5)
     price = models.IntegerField(default=20000)
     rating = models.IntegerField(default=5)
+    long = models.CharField(max_length = 200 , default= -17.7823932)
+    lat = models.CharField(max_length = 200 , default= 31.0546441)
     dest_name = models.CharField(max_length=25)
     img1=models.ImageField(upload_to='pics')
     img2 = models.ImageField(upload_to='pics')
@@ -30,6 +32,7 @@ class Detailed_desc(models.Model):
     day4 = models.CharField(max_length=200)
     day5 = models.CharField(max_length=200)
     day6 = models.CharField(max_length=200)
+
 
 class pessanger_detail(models.Model):
     Trip_id = models.AutoField(primary_key=True)
