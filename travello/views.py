@@ -373,8 +373,12 @@ def card_payment(request):
     CVV = request.POST['cvv']
 
     request.session['dcard'] = card_no
-    # try:
-    balance = User2.objects.get(cardId=card_no).balance
+    try:
+        balance = User2.objects.get(cardId=card_no).balance
+    except User2.DoesNotExist:
+            return render(request, 'wrongdata.html')
+
+
     # mail1 = User.objects.get(cardId=card_no).email
     request.session['total_balance'] = balance
 
