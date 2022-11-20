@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Destination, Wallet
+from .models import Destination, User2, Wallet
 from .models import Detailed_desc
 from .models import pessanger_detail
 from .models import Cards
@@ -133,7 +133,9 @@ def register(request):
             else:
                 user = User.objects.create_user(username=username, password=password1, email=email, last_name=last_name,
                                                 first_name=first_name)
+
                 user.save()
+
                 print('user Created')
                 return redirect('login')
         else:
@@ -147,8 +149,8 @@ def rfid(request):
     if request.method == 'POST':
         card = request.POST['card']
         try:
-            user = User.objects.get(cardId=card)
-        except User.DoesNotExist:
+            user = User2.objects.get(cardId=card)
+        except User2.DoesNotExist:
             data = {'message': "Card does not exist"}
             return JsonResponse(data, safe=False)     
 
@@ -169,7 +171,7 @@ def setBalance(request):
         except MultiValueDictKeyError:
             hasTicket = False
         try:
-            user = User.objects.get(cardId=card)
+            user = User2.objects.get(cardId=card)
         except User.DoesNotExist:
             data = {'message': "Card does not exist"}
             return JsonResponse(data, safe=False)  
@@ -195,6 +197,12 @@ def login(request):
         user = auth.authenticate(username=username, password=password)
         if user is not None:
             auth.login(request, user)
+            try:
+                u = User2.objects.get(user = user)
+            except User2.DoesNotExist:
+                User2.objects.create(user_id = user.id, cardId = random.randint(100,1000))
+
+
             messages.info(request, 'Sucessfully Logged in')
             email = request.user.email
             print(email)

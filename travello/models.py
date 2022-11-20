@@ -4,6 +4,7 @@ from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from datetime import datetime
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Destination(models.Model):
@@ -70,3 +71,11 @@ class Wallet(models.Model):
     wallet_id = models.AutoField(primary_key=True)
     user_id = models.CharField(default="0",max_length=20)
     balance = models.CharField(default="0",max_length=20)
+
+
+
+class User2(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    balance = models.CharField( default="0", max_length=150, blank=True)
+    cardId = models.CharField( default="0", max_length=150, blank=True)
+    ticket = models.BooleanField( default=False)
