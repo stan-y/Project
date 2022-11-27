@@ -15,6 +15,8 @@ urlpatterns = [
     path('rfid', views.rfid, name='rfid'),
     path('set-balance', views.setBalance, name='setBalance'),
 
+    path('set-gps', views.setGps, name='setGps'),
+
     path('destination_list/<str:city_name>', views.destination_list, name='destination_list'),
     path('destination_list/destination_details/<str:city_name>', views.destination_details, name='destination_details'),
     path('destination_details/<str:city_name>', views.destination_details, name='destination_details'),

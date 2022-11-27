@@ -201,6 +201,33 @@ def setBalance(request):
     else:
         return render(request, 'balance.html')
 
+def setGps(request):
+    if request.method == 'POST':
+        id = request.POST['id']
+        long = request.POST['long']
+        lat = request.POST['lat']
+
+        try:
+            location = Detailed_desc.objects.get(id=id)
+        except User2.DoesNotExist:
+            data = {'message': "Location does not exist"}
+            return JsonResponse(data, safe=False)   
+
+        location.lat = lat
+        location.long = long
+        location.save()  
+
+        data = {'location': location.lat,
+                'longitude': location.long,
+                'name': location.dest_name
+        }
+
+        return JsonResponse(data, safe=False)
+    else:
+        return render(request, 'location.html')
+
+
+
 def login(request):
     if request.method == 'POST':
         username = request.POST['username']
