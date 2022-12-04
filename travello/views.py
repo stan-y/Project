@@ -156,7 +156,9 @@ def register(request):
 
 def rfid(request):
     if request.method == 'POST':
+        print(">>>>>",request.POST)
         card = request.POST['card']
+        
         try:
             user = User2.objects.get(cardId=card)
         except User2.DoesNotExist:
@@ -203,12 +205,12 @@ def setBalance(request):
 
 def setGps(request):
     if request.method == 'POST':
-        id = request.POST['id']
+        # id = request.POST['id']
         long = request.POST['long']
         lat = request.POST['lat']
 
         try:
-            location = Detailed_desc.objects.get(id=id)
+            location = Detailed_desc.objects.get(dest_name='Rome')
         except User2.DoesNotExist:
             data = {'message': "Location does not exist"}
             return JsonResponse(data, safe=False)   
