@@ -158,6 +158,7 @@ def register(request):
 def rfid(request):
     if request.method == 'POST':
         # card = request.POST['card']
+        data = json.loads(request.body)
         card = data['card']
         try:
             user = User2.objects.get(cardId=card)
