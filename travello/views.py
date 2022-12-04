@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render
 from .models import Destination, User2, Wallet
 from .models import Detailed_desc
@@ -156,9 +157,8 @@ def register(request):
 
 def rfid(request):
     if request.method == 'POST':
-        print(">>>>>",request.POST)
-        card = request.POST['card']
-        
+        # card = request.POST['card']
+        card = data['card']
         try:
             user = User2.objects.get(cardId=card)
         except User2.DoesNotExist:
@@ -175,10 +175,14 @@ def rfid(request):
 
 def setBalance(request):
     if request.method == 'POST':
-        card = request.POST['card']
-        newBalance = request.POST['newBalance']
+        data = json.loads(request.body)
+        # card = request.POST['card']
+        # newBalance = request.POST['newBalance']
+        card = data['card']
+        newBalance = data['newBalance']
         try:
-            hasTicket = request.POST['hasTicket']
+            # hasTicket = request.POST['hasTicket']
+            hasTicket = data['hasTicket']
         except MultiValueDictKeyError:
             hasTicket = False
         try:
@@ -206,8 +210,13 @@ def setBalance(request):
 def setGps(request):
     if request.method == 'POST':
         # id = request.POST['id']
-        long = request.POST['long']
-        lat = request.POST['lat']
+        # long = request.POST['long']
+        # lat = request.POST['lat']
+        data = json.loads(request.body)
+
+        id = data['id']
+        long = data['long']
+        lat = data['lat']
 
         try:
             location = Detailed_desc.objects.get(dest_name='Rome')
