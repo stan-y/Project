@@ -80,16 +80,15 @@ def return_url(request):
 def topup(request):
 
     paynow = Paynow(
-    '15441', 
-    'f4a5d055-d142-4daa-bb13-86e908cc7f42',
+    '15557', 
+    '20d6c29d-b34b-4c48-b8d6-7fb08c96c954',
     'http://127.0.0.1:8000/return_url', 
     'http://127.0.0.1:8000/result_url'
     )
 
     payment = paynow.create_payment('Order #100', 'test@example.com')
 
-    payment.add('Bananas', 2.50)
-    payment.add('Apples', 3.40)
+    payment.add('Bananas', 10)
 
     # Save the response from paynow in a variable
     response = paynow.send(payment)
@@ -186,13 +185,15 @@ def setBalance(request):
             hasTicket = data['hasTicket']
         except MultiValueDictKeyError:
             hasTicket = False
+        except KeyError:
+            hasTicket = False
         try:
             user = User2.objects.get(cardId=card)
         except User.DoesNotExist:
             data = {'message': "Card does not exist"}
             return JsonResponse(data, safe=False)  
           
-        if hasTicket == 'true':
+        if hasTicket == 'True':
             user.ticket = True
         else:
             user.ticket = False
@@ -352,50 +353,16 @@ def pessanger_detail_def(request, city_name):
         return render(request, 'sample.html', {'formset': formset, 'city_name': city_name, })
 
 def add_funds(request):
-    KeyValueFormSet = formset_factory(KeyValueForm, extra=1)
     if request.method == 'POST':
-        formset = KeyValueFormSet(request.POST)
-        if formset.is_valid():
-            temp_date = datetime.strptime(request.POST['trip_date'], "%Y-%m-%d").date()
-            date1 = datetime.now().date()
-            if temp_date < date1:
-                return redirect('index')
-            obj = pessanger_detail.objects.get(Trip_id=3)
-            pipo_id = obj.Trip_same_id
-            #pipo_id =4
-            request.session['Trip_same_id'] = pipo_id
-            price = request.session['price']
-            city = request.session['city']
-            print(request.POST['trip_date'])
-            #temp_date = parse_date(request.POST['trip_date'])
-            temp_date = datetime.strptime(request.POST['trip_date'], "%Y-%m-%d").date()
-            usernameget = request.user.get_username()
-            print(temp_date)
-            request.session['n']=formset.total_form_count()
-            for i in range(0, formset.total_form_count()):
-                form = formset.forms[i]
-
-                t = pessanger_detail(Trip_same_id=pipo_id,first_name=form.cleaned_data['first_name'], last_name=form.cleaned_data['last_name'],
-                                     age=form.cleaned_data['age'],
-                                     Trip_date=temp_date,payment=price,username=usernameget,city=city)
-                t.save()
-                # print (formset.forms[i].form-[i]-value)
-
-            obj.Trip_same_id = (pipo_id + 1)
-            obj.save()
-            no_of_person = formset.total_form_count()
-            price1 = no_of_person * price
-            TAX = price1 * 0.18
-            TAX = float("{:.2f}".format(TAX))
-            final_total = TAX + price1
-            request.session['pay_amount'] = final_total
-            return render(request,'payment.html', {'no_of_person': no_of_person,
-                                                   'price1': price1, 'TAX': TAX, 'final_total': final_total,'city': city })
-    
+        # data = json.loads(request.body)
+        # balance = data['balance']
+        balance = request.POST['balance']
+        
+        return redirect("topup")
+        # return render(request, 'paynow.html')
     else:
-        formset = KeyValueFormSet()
 
-        return render(request, 'paynow.html', {'formset': formset })
+        return render(request, 'paynow.html')
 
 
 def upcoming_trips(request):
