@@ -215,13 +215,16 @@ def setGps(request):
         # long = request.POST['long']
         # lat = request.POST['lat']
         data = json.loads(request.body)
-
-        id = data['id']
+        data = eval(data
+        
+        )
+        
+        id = int(data['id'])
         long = data['long']
         lat = data['lat']
-
+        
         try:
-            location = Detailed_desc.objects.get(dest_name='Rome')
+            location = Detailed_desc.objects.get(dest_name='Rezende - UZ rank')
         except User2.DoesNotExist:
             data = {'message': "Location does not exist"}
             return JsonResponse(data, safe=False)   

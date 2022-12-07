@@ -28,7 +28,7 @@ SECRET_KEY = 'Stan'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.100.19', '127.0.0.1', '172.20.10.9']
+ALLOWED_HOSTS = ['192.168.100.26', '127.0.0.1', '172.20.10.9', '192.168.100.6']
 
 
 # Application definition
